@@ -1,0 +1,28 @@
+[
+  {
+    "name": "prometheus",
+    "image": "ukti/prometheus",
+    "cpu": 1000,
+    "memory": 1000,
+    "essential": true,
+    "privileged": true,
+    "portMappings": [
+      {
+        "containerPort": 9090,
+        "hostPort": 9090,
+        "protocol": "tcp"
+      },
+      {
+        "containerPort": 9102,
+        "hostPort": 9102,
+        "protocol": "tcp"
+      }
+    ],
+    "mountPoints": [
+      {
+        "sourceVolume": "prometheus_data",
+        "containerPath": "/prometheus"
+      }
+    ]
+  }
+]

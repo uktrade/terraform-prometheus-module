@@ -1,0 +1,70 @@
+[
+  {
+    "name": "authbroker_proxy",
+    "image": "ukti/authbroker-proxy:latest",
+    "cpu": 400,
+    "memory": 1000,
+    "essential": true,
+    "privileged": true,
+    "environment": [
+      {
+        "name": "ABC_REDIRECT_HOST",
+        "value": "${authbroker_proxy_redirect_url}"
+      },
+      {
+        "name": "ABC_BASE_URL",
+        "value": "${authbroker_url}"
+      },
+      {
+        "name": "ABC_CLIENT_ID",
+        "value": "${authbroker_client_id}"
+      },
+      {
+        "name": "ABC_CLIENT_SECRET",
+        "value": "${authbroker_client_secret}"
+      },
+      {
+        "name": "SECRET_KEY",
+        "value": "${authbroker_proxy_redirect_url}"
+      }
+    ]
+  },
+  {
+    "name": "authbroker_proxy_nginx",
+    "image": "ukti/authbroker-proxy-nginx:latest",
+    "cpu": 400,
+    "memory": 1000,
+    "essential": true,
+    "privileged": true,
+    "links": [
+      "authbroker_proxy"
+    ],
+    "portMappings": [
+      {
+        "containerPort": 443
+      }
+    ],
+    "environment": [
+      {
+        "name": "APP_PROXY_TARGET",
+        "value": "prom.internal.uktrade.io"
+      },
+      {
+        "name": "APP_PROXY_PORT",
+        "value": "9090"
+      },
+      {
+        "name": "APP_PROXY_PROTOCOL",
+        "value": "http"
+      },
+      {
+        "name": "ABC_PROXY_TARGET",
+        "value": "authbroker_proxy"
+      },
+      {
+        "name": "ABC_PROXY_PORT",
+        "value": "5000"
+      }
+    ]
+  }
+]

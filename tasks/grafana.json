@@ -1,0 +1,129 @@
+[
+  {
+    "name": "grafana",
+    "image": "grafana/grafana",
+    "cpu": 1000,
+    "memory": 1000,
+    "essential": true,
+    "privileged": true,
+    "environment": [
+      {
+        "name": "GF_DATABASE_TYPE",
+        "value": "postgres"
+      },
+      {
+        "name": "GF_DATABASE_HOST",
+        "value": "${db_host}"
+      },
+      {
+        "name": "GF_DATABASE_USER",
+        "value": "${db_user}"
+      },
+      {
+        "name": "GF_DATABASE_NAME",
+        "value": "${db_name}"
+      },
+      {
+        "name": "GF_DATABASE_PASSWORD",
+        "value": "${db_password}"
+      },
+      {
+        "name": "GF_AUTH_DISABLE_LOGIN_FORM",
+        "value": "false"
+      },
+      {
+        "name": "GF_AUTH_ANONYMOUS_ENABLED",
+        "value": "true"
+      },
+      {
+        "name": "GF_AUTH_ANONYMOUS_ORG_ROLE",
+        "value": "Admin"
+      },
+      {
+        "name": "GF_USERS_ALLOW_SIGNUP",
+        "value": "false"
+      },
+      {
+        "name": "GF_SERVER_ENFORCE_DOMAIN",
+        "value": "false"
+      },
+      {
+        "name": "GF_SERVER_PROTOCOL",
+        "value": "http"
+      },
+      {
+        "name": "GF_SERVER_ROOT_URL",
+        "value": "https://grafana.ci.uktrade.io"
+      }
+    ]
+  },
+  {
+    "name": "authbroker_proxy",
+    "image": "ukti/authbroker-proxy:latest",
+    "cpu": 400,
+    "memory": 1000,
+    "essential": true,
+    "privileged": true,
+    "environment": [
+      {
+        "name": "ABC_REDIRECT_HOST",
+        "value": "${authbroker_proxy_redirect_url}"
+      },
+      {
+        "name": "ABC_BASE_URL",
+        "value": "${authbroker_url}"
+      },
+      {
+        "name": "ABC_CLIENT_ID",
+        "value": "${authbroker_client_id}"
+      },
+      {
+        "name": "ABC_CLIENT_SECRET",
+        "value": "${authbroker_client_secret}"
+      },
+      {
+        "name": "SECRET_KEY",
+        "value": "${authbroker_proxy_redirect_url}"
+      }
+    ]
+  },
+  {
+    "name": "authbroker_proxy_nginx",
+    "image": "ukti/authbroker-proxy-nginx:latest",
+    "cpu": 400,
+    "memory": 1000,
+    "essential": true,
+    "privileged": true,
+    "links": [
+      "authbroker_proxy",
+      "grafana"
+    ],
+    "portMappings": [
+      {
+        "containerPort": 443
+      }
+    ],
+    "environment": [
+      {
+        "name": "APP_PROXY_TARGET",
+        "value": "grafana"
+      },
+      {
+        "name": "APP_PROXY_PORT",
+        "value": "3000"
+      },
+      {
+        "name": "APP_PROXY_PROTOCOL",
+        "value": "http"
+      },
+      {
+        "name": "ABC_PROXY_TARGET",
+        "value": "authbroker_proxy"
+      },
+      {
+        "name": "ABC_PROXY_PORT",
+        "value": "5000"
+      }
+    ]
+  }
+]
