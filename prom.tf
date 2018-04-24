@@ -9,7 +9,7 @@ resource "aws_route53_zone" "prom-private-zone" {
 
 resource "aws_route53_record" "prom-internal-alias" {
   zone_id = "${aws_route53_zone.prom-private-zone.zone_id}"
-  name    = "prom.internal.uktrade.io"
+  name    = "prom.${var.internal_hosted_zone}"
   type    = "A"
 
   alias {
@@ -148,6 +148,14 @@ module "prom-ecs-cluster" {
 
 data "template_file" "prom-task-definition-template" {
   template = "${file("${path.module}/tasks/prom.json")}"
+
+  vars = {
+    es_url = "${var.es_url}"
+
+    region = "${var.aws_conf["region"]}"
+    log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
+    stream_prefix = "awslogs-${var.environment}-prometheus"
+  }
 }
 
 resource "aws_ecs_task_definition" "prom-task-definition" {
@@ -192,6 +200,10 @@ data "template_file" "auth-proxy-definition-template" {
     authbroker_client_id = "${var.authbroker_client_id}"
     authbroker_client_secret = "${var.authbroker_client_secret}"
     authbroker_proxy_redirect_url = "${var.prometheus_authbroker_proxy_redirect_url}"
+
+    region = "${var.aws_conf["region"]}"
+    log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
+    stream_prefix = "awslogs-${var.environment}-prometheus"
   }
 }
 

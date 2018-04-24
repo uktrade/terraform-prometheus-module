@@ -112,3 +112,7 @@ variable "prometheus_ecs_instance_type" {
   type = "string"
   default = "t2.medium"
 }
+
+variable "es_url" {
+  type = "string"
+}

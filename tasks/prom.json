@@ -23,6 +23,39 @@
         "sourceVolume": "prometheus_data",
         "containerPath": "/prometheus"
       }
+    ],
+    "links": [
+      "es_adaptor"
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${stream_prefix}"
+      }
+    }
+  },
+  {
+    "name": "es_adaptor",
+    "image": "ukti/prometheus-es-adaptor",
+    "cpu": 200,
+    "memory": 800,
+    "essential": true,
+    "privileged": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${stream_prefix}"
+      }
+    },
+   "environment": [
+      {
+        "name": "ES_URL",
+        "value": "${es_url}"
+      }
     ]
   }
 ]
