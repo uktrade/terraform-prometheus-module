@@ -3,7 +3,7 @@
     "name": "prometheus",
     "image": "ukti/prometheus",
     "cpu": 1000,
-    "memory": 1000,
+    "memory": 4000,
     "essential": true,
     "privileged": true,
     "portMappings": [
@@ -40,9 +40,21 @@
     "name": "es_adaptor",
     "image": "ukti/prometheus-es-adaptor",
     "cpu": 200,
-    "memory": 800,
+    "memory": 1500,
     "essential": true,
     "privileged": true,
+    "ulimits": [
+      {
+        "name": "nofile",
+        "softLimit": 65536,
+        "hardLimit": 65536
+      },
+      {
+        "name": "memlock",
+        "softLimit": -1,
+        "hardLimit": -1
+      }
+    ],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
