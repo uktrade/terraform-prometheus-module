@@ -110,7 +110,7 @@ variable "prometheus_ecs_instance_count" {
 
 variable "prometheus_ecs_instance_type" {
   type = "string"
-  default = "t2.medium"
+  default = "m4.large"
 }
 
 variable "es_url" {
