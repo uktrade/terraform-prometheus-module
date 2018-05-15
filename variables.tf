@@ -1,4 +1,5 @@
 data "aws_availability_zones" "available" {}
+data "aws_region" "current" {}
 
 variable "public_subnets" {
   type = "list"
@@ -6,11 +7,6 @@ variable "public_subnets" {
 
 variable "private_subnets" {
   type = "list"
-}
-
-variable "aws_conf" {
-  type = "map"
-  default = {}
 }
 
 variable "internal_hosted_zone" {
