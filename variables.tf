@@ -109,6 +109,11 @@ variable "prometheus_ecs_instance_type" {
   default = "m4.large"
 }
 
+variable "prometheus_volume_size" {
+  type = "string"
+  default = "100"
+}
+
 variable "es_instance_count" {
   type = "string"
   default = "3"

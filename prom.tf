@@ -119,6 +119,8 @@ module "prom-ecs-cluster" {
   key_name            = "${var.environment}-prom"
   associate_public_ip_address = false
 
+  extra_volume_size = "${var.prometheus_volume_size}"
+
   additional_user_data_script = "file(${path.module}/files/prom_volume_setup.sh)"
 }
 
