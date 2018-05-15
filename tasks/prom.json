@@ -2,7 +2,7 @@
   {
     "name": "prometheus",
     "image": "ukti/prometheus",
-    "cpu": 1000,
+    "cpu": 800,
     "memory": 4000,
     "essential": true,
     "privileged": true,
@@ -25,7 +25,8 @@
       }
     ],
     "links": [
-      "es_adaptor"
+      "read_adaptor",
+      "write_adaptor"
     ],
     "logConfiguration": {
       "logDriver": "awslogs",
@@ -37,10 +38,10 @@
     }
   },
   {
-    "name": "es_adaptor",
+    "name": "read_adaptor",
     "image": "ukti/prometheus-es-adaptor",
     "cpu": 200,
-    "memory": 1500,
+    "memory": 750,
     "essential": true,
     "privileged": true,
     "ulimits": [
@@ -63,7 +64,41 @@
         "awslogs-stream-prefix": "${stream_prefix}"
       }
     },
-   "environment": [
+    "environment": [
+      {
+        "name": "ES_URL",
+        "value": "${es_url}"
+      }
+    ]
+  },
+  {
+    "name": "write_adaptor",
+    "image": "ukti/prometheus-es-adaptor",
+    "cpu": 200,
+    "memory": 750,
+    "essential": true,
+    "privileged": true,
+    "ulimits": [
+      {
+        "name": "nofile",
+        "softLimit": 65536,
+        "hardLimit": 65536
+      },
+      {
+        "name": "memlock",
+        "softLimit": -1,
+        "hardLimit": -1
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${stream_prefix}"
+      }
+    },
+    "environment": [
       {
         "name": "ES_URL",
         "value": "${es_url}"

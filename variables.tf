@@ -113,6 +113,34 @@ variable "prometheus_ecs_instance_type" {
   default = "m4.large"
 }
 
-variable "es_url" {
+variable "es_instance_count" {
+  type = "string"
+  default = "3"
+}
+
+variable "es_instance_type" {
+  type = "string"
+  default = "t2.medium.elasticsearch"
+}
+
+variable "es_dedicated_master_type" {
+  type = "string"
+  default = "t2.medium.elasticsearch"
+}
+
+variable "es_volume_size" {
+  type = "string"
+  default = "100"
+}
+
+variable "paas_exporter_url" {
+  type = "string"
+}
+
+variable "pass_exporter_username" {
+  type = "string"
+}
+
+variable "pass_exporter_password" {
   type = "string"
 }

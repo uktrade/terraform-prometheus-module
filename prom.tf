@@ -1,25 +1,4 @@
 // -----
-// Private hosted zone
-// -----
-
-resource "aws_route53_zone" "prom-private-zone" {
-  name = "${var.internal_hosted_zone}"
-  vpc_id = "${module.vpc.vpc_id}"
-}
-
-resource "aws_route53_record" "prom-internal-alias" {
-  zone_id = "${aws_route53_zone.prom-private-zone.zone_id}"
-  name    = "prom.${var.internal_hosted_zone}"
-  type    = "A"
-
-  alias {
-    name                   = "${aws_elb.prom-internal-elb.dns_name}"
-    zone_id                = "${aws_elb.prom-internal-elb.zone_id}"
-    evaluate_target_health = false
-  }
-}
-
-// -----
 // Internal ELB
 // -----
 
@@ -45,7 +24,7 @@ resource "aws_security_group" "prom-internal-elb-sg" {
 
 # TODO: migrate to ALB
 resource "aws_elb" "prom-internal-elb" {
-  name               = "prom-internal-elb"
+  name = "prom-internal-elb"
   subnets = ["${module.vpc.private_subnets}"]
   internal = true
   security_groups = ["${aws_security_group.prom-internal-elb-sg.id}"]
@@ -100,7 +79,6 @@ module "prom-alb" {
   log_bucket_name               = "${var.environment}-logs-prometheus"
   log_location_prefix           = "prometheus"
   subnets                       = ["${module.vpc.public_subnets}"]
-//  tags                          = "${map("Environment", "test")}"
   vpc_id                        = "${module.vpc.vpc_id}"
 }
 
@@ -130,7 +108,7 @@ resource "aws_security_group" "prom-lc-sg" {
 }
 
 module "prom-ecs-cluster" {
-  source              = "modules/aws_ecs_cluster_plus_ebs"
+  source              = "github.com/lgarvey/tf_aws_ecs"
   name                = "${var.environment}-prometheus"
   servers             = "${var.prometheus_ecs_instance_count}"
   instance_type       = "${var.prometheus_ecs_instance_type}"
@@ -140,6 +118,8 @@ module "prom-ecs-cluster" {
   security_group_ids = ["${aws_security_group.prom-lc-sg.id}"]
   key_name            = "${var.environment}-prom"
   associate_public_ip_address = false
+
+  additional_user_data_script = "file(${path.module}/files/prom_volume_setup.sh)"
 }
 
 // -----
@@ -150,7 +130,11 @@ data "template_file" "prom-task-definition-template" {
   template = "${file("${path.module}/tasks/prom.json")}"
 
   vars = {
-    es_url = "${var.es_url}"
+    es_url = "${module.es.endpoint}"
+
+    paas_exporter_url = "${var.paas_exporter_url}"
+    pass_exporter_username = "${var.pass_exporter_username}"
+    pass_exporter_password = "${var.pass_exporter_password}"
 
     region = "${var.aws_conf["region"]}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
@@ -181,11 +165,6 @@ resource "aws_ecs_service" "prom-ecs-service" {
     container_name   = "prometheus"
     container_port   = 9090
   }
-
-  depends_on = [
-    "aws_iam_role.prom-ecs-service-role",
-    "aws_iam_role_policy.prom-ecs-service-role-policy"
-  ]
 }
 
 // ----

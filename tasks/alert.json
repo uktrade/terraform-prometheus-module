@@ -1,0 +1,22 @@
+[
+  {
+    "name": "alertmanager",
+    "image": "prom/alertmanager",
+    "cpu": 250,
+    "memory": 250,
+    "essential": true,
+    "privileged": true,
+    "portMappings": [
+      {
+        "containerPort": 9093,
+        "hostPort": 9093,
+        "protocol": "tcp"
+      },
+      {
+        "containerPort": 9094,
+        "hostPort": 9094,
+        "protocol": "tcp"
+      }
+    ]
+  }
+]
