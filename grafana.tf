@@ -58,6 +58,7 @@ resource "aws_security_group" "grafana-alb-sg" {
 
 module "grafana-alb" {
   source                        = "terraform-aws-modules/alb/aws"
+  version                       = "2.5.0"
   alb_name                      = "${var.environment}-grafana-alb"
   alb_protocols                 = ["HTTPS"]
   alb_security_groups           = ["${aws_security_group.prom-alb-sg.id}"]

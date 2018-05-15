@@ -66,6 +66,7 @@ resource "aws_security_group" "prom-alb-sg" {
 
 module "prom-alb" {
   source                        = "terraform-aws-modules/alb/aws"
+  version                       = "2.5.0"
   alb_name                      = "${var.environment}-prom-alb"
   alb_protocols                 = ["HTTPS"]
   alb_security_groups           = ["${aws_security_group.prom-alb-sg.id}"]
