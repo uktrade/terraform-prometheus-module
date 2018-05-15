@@ -52,11 +52,6 @@ variable "grafana_authbroker_proxy_redirect_url" {
   type = "string"
 }
 
-variable "prometheus_volume_size" {
-  type = "string"
-  default = "50"
-}
-
 variable "grafana_db_instance_size" {
   type = "string"
   default = "db.m4.large"
