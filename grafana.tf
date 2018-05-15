@@ -101,7 +101,7 @@ resource "aws_security_group" "grafana-lc-sg" {
 }
 
 module "grafana-ecs-cluster" {
-  source              = "modules/aws_ecs_cluster"
+  source              = "github.com/terraform-community-modules/tf_aws_ecs"
   name                = "${var.environment}-grafana"
   servers             = "${var.grafana_ecs_instance_count}"
   instance_type       = "${var.grafana_ecs_instance_type}"
