@@ -136,7 +136,7 @@ data "template_file" "prom-task-definition-template" {
     pass_exporter_username = "${var.pass_exporter_username}"
     pass_exporter_password = "${var.pass_exporter_password}"
 
-    region = "${data.aws_region.current}"
+    region = "${data.aws_region.current.name}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
     stream_prefix = "awslogs-${var.environment}-prometheus"
   }
@@ -180,7 +180,7 @@ data "template_file" "auth-proxy-definition-template" {
     authbroker_client_secret = "${var.authbroker_client_secret}"
     authbroker_proxy_redirect_url = "${var.prometheus_authbroker_proxy_redirect_url}"
 
-    region = "${data.aws_region.current}"
+    region = "${data.aws_region.current.name}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
     stream_prefix = "awslogs-${var.environment}-prometheus"
   }
