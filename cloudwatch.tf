@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_log_group" "prometheus-cwl-log-group" {
-  name = "prometheus-${var.environment}"
+  name = "${local.service}"
 
   tags {
-    Serivce = "prometheus"
+    Service = "prometheus"
   }
 }

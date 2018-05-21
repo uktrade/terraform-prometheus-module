@@ -1,4 +1,3 @@
-
 module "grafana-db" {
   source = "terraform-aws-modules/rds/aws"
 
@@ -22,10 +21,7 @@ module "grafana-db" {
 
   backup_retention_period = 7
 
-  # DB subnet group
   subnet_ids = ["${module.vpc.private_subnets}"]
-
-  # DB parameter group
   family = "postgres9.6"
 }
 
@@ -82,7 +78,7 @@ module "grafana-alb" {
 
 # TODO: tighten this SG!
 resource "aws_security_group" "grafana-lc-sg" {
-  name        = "${var.environment}-prom-core-sg"
+  name        = "${local.service}-core-sg"
   description = "Prometheus security group"
   vpc_id      = "${module.vpc.vpc_id}"
 
@@ -138,7 +134,7 @@ resource "aws_ecs_task_definition" "grafana-task-definition" {
 }
 
 resource "aws_ecs_service" "grafana-ecs-service" {
-  name            = "${var.environment}-grafana-ecs-service"
+  name            = "${var.environment}-grafana-service"
   cluster         = "${module.grafana-ecs-cluster.cluster_id}"
   task_definition = "${aws_ecs_task_definition.grafana-task-definition.arn}"
   desired_count   = 1

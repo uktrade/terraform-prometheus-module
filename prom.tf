@@ -22,9 +22,8 @@ resource "aws_security_group" "prom-internal-elb-sg" {
   }
 }
 
-# TODO: migrate to ALB
 resource "aws_elb" "prom-internal-elb" {
-  name = "prom-internal-elb"
+  name = "${local.service}-internal-elb"
   subnets = ["${module.vpc.private_subnets}"]
   internal = true
   security_groups = ["${aws_security_group.prom-internal-elb-sg.id}"]
@@ -42,7 +41,7 @@ resource "aws_elb" "prom-internal-elb" {
 // -----
 
 resource "aws_security_group" "prom-alb-sg" {
-  name        = "${var.environment}-prom-alb-sg"
+  name        = "${local.service}-alb-sg"
   description = "Prometheus security group"
   vpc_id      = "${module.vpc.vpc_id}"
 
@@ -67,7 +66,7 @@ resource "aws_security_group" "prom-alb-sg" {
 module "prom-alb" {
   source                        = "terraform-aws-modules/alb/aws"
   version                       = "2.5.0"
-  alb_name                      = "${var.environment}-prom-alb"
+  alb_name                      = "${local.service}-alb"
   alb_protocols                 = ["HTTPS"]
   alb_security_groups           = ["${aws_security_group.prom-alb-sg.id}"]
   backend_protocol              = "HTTPS"
@@ -87,9 +86,8 @@ module "prom-alb" {
 // ECS cluster
 // -----
 
-# TODO: tighten SG
 resource "aws_security_group" "prom-lc-sg" {
-  name        = "${var.environment}-prom-sg"
+  name        = "${local.service}-sg"
   description = "Prometheus security group"
   vpc_id      = "${module.vpc.vpc_id}"
 
@@ -110,7 +108,7 @@ resource "aws_security_group" "prom-lc-sg" {
 
 module "prom-ecs-cluster" {
   source              = "github.com/lgarvey/tf_aws_ecs"
-  name                = "${var.environment}-prometheus"
+  name                = "${local.service}"
   servers             = "${var.prometheus_ecs_instance_count}"
   instance_type       = "${var.prometheus_ecs_instance_type}"
   subnet_id           = ["${module.vpc.private_subnets}"]
@@ -133,7 +131,7 @@ data "template_file" "prom-task-definition-template" {
   template = "${file("${path.module}/tasks/prom.json")}"
 
   vars = {
-    es_url = "${module.es.endpoint}"
+    es_url = "${aws_elasticsearch_domain.es.endpoint}"
 
     paas_exporter_url = "${var.paas_exporter_url}"
     pass_exporter_username = "${var.pass_exporter_username}"
@@ -146,7 +144,7 @@ data "template_file" "prom-task-definition-template" {
 }
 
 resource "aws_ecs_task_definition" "prom-task-definition" {
-  family                = "prometheus"
+  family                = "${local.service}"
   container_definitions = "${data.template_file.prom-task-definition-template.rendered}"
 
   volume {
@@ -156,7 +154,7 @@ resource "aws_ecs_task_definition" "prom-task-definition" {
 }
 
 resource "aws_ecs_service" "prom-ecs-service" {
-  name            = "prom-ecs-service"
+  name            = "${local.service}-service"
   cluster         = "${module.prom-ecs-cluster.cluster_id}"
   task_definition = "${aws_ecs_task_definition.prom-task-definition.arn}"
   desired_count   = 1
@@ -190,12 +188,12 @@ data "template_file" "auth-proxy-definition-template" {
 }
 
 resource "aws_ecs_task_definition" "auth-proxy-task-definition" {
-  family                = "auth-proxy"
+  family                = "${local.service}-auth-proxy"
   container_definitions = "${data.template_file.auth-proxy-definition-template.rendered}"
 }
 
 resource "aws_ecs_service" "auth-proxy-ecs-service" {
-  name            = "auth-proxy-ecs-service"
+  name            = "${local.service}-authproxy-service"
   cluster         = "${module.prom-ecs-cluster.cluster_id}"
   task_definition = "${aws_ecs_task_definition.auth-proxy-task-definition.arn}"
   desired_count   = 1

@@ -119,14 +119,9 @@ variable "es_instance_type" {
   default = "t2.medium.elasticsearch"
 }
 
-variable "es_dedicated_master_type" {
-  type = "string"
-  default = "t2.medium.elasticsearch"
-}
-
 variable "es_volume_size" {
   type = "string"
-  default = "100"
+  default = "50"
 }
 
 variable "paas_exporter_url" {

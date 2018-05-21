@@ -1,5 +1,5 @@
 resource "aws_iam_role" "prom-ecs-service-role" {
-  name = "prom-ecs-service-role"
+  name = "${local.service}-ecs-service-role"
 
   assume_role_policy = <<EOF
 {
@@ -19,7 +19,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "prom-ecs-service-role-policy" {
-  name = "prom-ecs-service-role-policy"
+  name = "${local.service}-ecs-service-role-policy"
   role = "${aws_iam_role.prom-ecs-service-role.name}"
 
   policy = <<EOF
