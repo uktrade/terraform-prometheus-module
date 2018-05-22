@@ -1,3 +1,4 @@
+
 module "grafana-db" {
   source = "terraform-aws-modules/rds/aws"
 
@@ -14,7 +15,7 @@ module "grafana-db" {
   password = "${var.grafana_db_password}"
   port     = "5432"
 
-  vpc_security_group_ids = ["${module.vpc.default_security_group_id}"]
+  vpc_security_group_ids = ["${aws_security_group.grafana-lc-sg.id}"]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -76,7 +77,6 @@ module "grafana-alb" {
 // ECS cluster
 // -----
 
-# TODO: tighten this SG!
 resource "aws_security_group" "grafana-lc-sg" {
   name        = "${local.service}-core-sg"
   description = "Prometheus security group"
