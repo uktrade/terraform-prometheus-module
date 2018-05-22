@@ -4,8 +4,8 @@ resource "aws_security_group" "es-sg" {
   vpc_id      = "${module.vpc.vpc_id}"
 
   ingress {
-    from_port   = 9200
-    to_port     = 9200
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["${var.vpc_cidr}"]
   }
@@ -54,7 +54,7 @@ resource "aws_elasticsearch_domain" "es" {
 
   vpc_options = {
     security_group_ids = ["${aws_security_group.es-sg.id}"]
-    subnet_ids = ["${var.private_subnets}"]
+    subnet_ids = ["${element(module.vpc.private_subnets, 0)}"]
   }
 
   ebs_options {

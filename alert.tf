@@ -1,6 +1,6 @@
-//// -----
-//// Internal ELB
-//// -----
+////// -----
+////// Internal ELB
+////// -----
 //
 //resource "aws_security_group" "alert-internal-elb-sg" {
 //  name        = "${var.environment}-alertmanager-internal-elb-sg"
@@ -33,10 +33,10 @@
 //    evaluate_target_health = false
 //  }
 //}
-//
-//// -----
-//// Alertmanager ECS Service
-//// -----
+////
+////// -----
+////// Alertmanager ECS Service
+////// -----
 //
 //data "template_file" "alertmanager-task-definition-template" {
 //  template = "${file("${path.module}/tasks/alert.json")}"

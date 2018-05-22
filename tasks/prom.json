@@ -6,6 +6,20 @@
     "memory": 4000,
     "essential": true,
     "privileged": true,
+    "environment": [
+      {
+        "name": "paas_exporter_url",
+        "value": "${paas_exporter_url}"
+      },
+      {
+        "name": "paas_exporter_username",
+        "value": "${paas_exporter_username}"
+      },
+      {
+        "name": "paas_exporter_password",
+        "value": "${paas_exporter_password}"
+      }
+    ],
     "portMappings": [
       {
         "containerPort": 9090,
@@ -67,7 +81,7 @@
     "environment": [
       {
         "name": "ES_URL",
-        "value": "${es_url}"
+        "value": "https://${es_url}"
       }
     ]
   },
@@ -101,7 +115,7 @@
     "environment": [
       {
         "name": "ES_URL",
-        "value": "${es_url}"
+        "value": "https://${es_url}"
       }
     ]
   }

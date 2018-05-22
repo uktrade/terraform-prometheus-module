@@ -71,7 +71,7 @@ module "prom-alb" {
   alb_security_groups           = ["${aws_security_group.prom-alb-sg.id}"]
   backend_protocol              = "HTTPS"
   backend_port                  = 443
-  certificate_arn               = "arn:aws:acm:eu-west-2:177122686904:certificate/58d0e335-afc1-47e6-a025-3cef69a01a88"
+  certificate_arn               = "${var.public_alb_certificate_arn}"
   create_log_bucket             = true
   enable_logging                = true
   deregistration_delay          = 10
@@ -134,8 +134,8 @@ data "template_file" "prom-task-definition-template" {
     es_url = "${aws_elasticsearch_domain.es.endpoint}"
 
     paas_exporter_url = "${var.paas_exporter_url}"
-    pass_exporter_username = "${var.pass_exporter_username}"
-    pass_exporter_password = "${var.pass_exporter_password}"
+    paas_exporter_username = "${var.paas_exporter_username}"
+    paas_exporter_password = "${var.paas_exporter_password}"
 
     region = "${data.aws_region.current.name}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
@@ -183,7 +183,7 @@ data "template_file" "auth-proxy-definition-template" {
 
     region = "${data.aws_region.current.name}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
-    stream_prefix = "awslogs-${var.environment}-prometheus"
+    stream_prefix = "awslogs-${var.environment}-prometheus-auth"
   }
 }
 

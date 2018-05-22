@@ -128,10 +128,14 @@ variable "paas_exporter_url" {
   type = "string"
 }
 
-variable "pass_exporter_username" {
+variable "paas_exporter_username" {
   type = "string"
 }
 
-variable "pass_exporter_password" {
+variable "paas_exporter_password" {
+  type = "string"
+}
+
+variable "s3_config_bucket" {
   type = "string"
 }

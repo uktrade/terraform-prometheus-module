@@ -125,6 +125,10 @@ data "template_file" "grafana-task-definition-template" {
     db_user = "${var.grafana_db_user}"
     db_name = "${var.grafana_db_name}"
     db_password = "${var.grafana_db_password}"
+
+    region = "${data.aws_region.current.name}"
+    log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
+    stream_prefix = "awslogs-${var.environment}-grafana"
   }
 }
 
@@ -137,7 +141,7 @@ resource "aws_ecs_service" "grafana-ecs-service" {
   name            = "${var.environment}-grafana-service"
   cluster         = "${module.grafana-ecs-cluster.cluster_id}"
   task_definition = "${aws_ecs_task_definition.grafana-task-definition.arn}"
-  desired_count   = 1
+  desired_count   = "${var.grafana_ecs_instance_count}"
   iam_role        = "${aws_iam_role.prom-ecs-service-role.arn}"
   health_check_grace_period_seconds = 10
 

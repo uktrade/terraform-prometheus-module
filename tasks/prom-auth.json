@@ -27,7 +27,15 @@
         "name": "SECRET_KEY",
         "value": "${authbroker_proxy_redirect_url}"
       }
-    ]
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${stream_prefix}"
+      }
+    }
   },
   {
     "name": "authbroker_proxy_nginx",
@@ -65,6 +73,14 @@
         "name": "ABC_PROXY_PORT",
         "value": "5000"
       }
-    ]
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${stream_prefix}"
+      }
+    }
   }
 ]
