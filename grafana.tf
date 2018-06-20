@@ -122,6 +122,9 @@ data "template_file" "grafana-task-definition-template" {
     authbroker_client_secret = "${var.authbroker_client_secret}"
     authbroker_proxy_redirect_url = "${var.grafana_authbroker_proxy_redirect_url}"
     db_host = "${module.grafana-db.this_db_instance_endpoint}"
+
+    dns_resolver      = "${cidrhost(var.vpc_cidr, 2)}"
+
     db_user = "${var.grafana_db_user}"
     db_name = "${var.grafana_db_name}"
     db_password = "${var.grafana_db_password}"

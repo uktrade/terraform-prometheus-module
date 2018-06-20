@@ -136,6 +136,16 @@ variable "paas_exporter_password" {
   type = "string"
 }
 
+variable "autoscaler_exporter_url" {
+  type = "string"
+}
+
 variable "s3_config_bucket" {
   type = "string"
 }
+
+# alertmanager config
+variable "smtp_username" {}
+variable "smtp_password" {}
+variable "smtp_from" {}
+variable "smtp_server" {}

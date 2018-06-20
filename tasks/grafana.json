@@ -68,8 +68,8 @@
   {
     "name": "authbroker_proxy",
     "image": "ukti/authbroker-proxy:latest",
-    "cpu": 400,
-    "memory": 1000,
+    "cpu": 200,
+    "memory": 500,
     "essential": true,
     "privileged": true,
     "environment": [
@@ -106,8 +106,8 @@
   {
     "name": "authbroker_proxy_nginx",
     "image": "ukti/authbroker-proxy-nginx:latest",
-    "cpu": 400,
-    "memory": 1000,
+    "cpu": 200,
+    "memory": 500,
     "essential": true,
     "privileged": true,
     "links": [
@@ -139,6 +139,10 @@
       {
         "name": "ABC_PROXY_PORT",
         "value": "5000"
+      },
+      {
+        "name": "DNS_RESOLVER",
+        "value": "${dns_resolver}"
       }
     ],
     "logConfiguration": {

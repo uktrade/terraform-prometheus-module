@@ -137,6 +137,8 @@ data "template_file" "prom-task-definition-template" {
     paas_exporter_username = "${var.paas_exporter_username}"
     paas_exporter_password = "${var.paas_exporter_password}"
 
+    autoscaler_exporter_url = "${var.autoscaler_exporter_url}"
+
     region = "${data.aws_region.current.name}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
     stream_prefix = "awslogs-${var.environment}-prometheus"
@@ -180,6 +182,8 @@ data "template_file" "auth-proxy-definition-template" {
     authbroker_client_id = "${var.authbroker_client_id}"
     authbroker_client_secret = "${var.authbroker_client_secret}"
     authbroker_proxy_redirect_url = "${var.prometheus_authbroker_proxy_redirect_url}"
+
+    dns_resolver      = "${cidrhost(var.vpc_cidr, 2)}"
 
     region = "${data.aws_region.current.name}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"

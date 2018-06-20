@@ -72,6 +72,10 @@
       {
         "name": "ABC_PROXY_PORT",
         "value": "5000"
+      },
+      {
+        "name": "DNS_RESOLVER",
+        "value": "${dns_resolver}"
       }
     ],
     "logConfiguration": {
