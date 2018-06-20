@@ -37,19 +37,30 @@
 ////// -----
 ////// Alertmanager ECS Service
 ////// -----
-//
-//data "template_file" "alertmanager-task-definition-template" {
-//  template = "${file("${path.module}/tasks/alert.json")}"
-//}
-//
-//resource "aws_ecs_task_definition" "alertmanager-task-definition" {
-//  family                = "alertmanager"
-//  container_definitions = "${data.template_file.alertmanager-task-definition-template.rendered}"
-//}
-//
-//resource "aws_ecs_service" "alertmanager-ecs-service" {
-//  name            = "alertmanager-ecs-service"
-//  cluster         = "${module.grafana-ecs-cluster.cluster_id}"
-//  task_definition = "${aws_ecs_task_definition.alertmanager-task-definition.arn}"
-//  desired_count   = 1
-//}
+
+data "template_file" "alertmanager-task-definition-template" {
+  template = "${file("${path.module}/tasks/alert.json")}"
+
+  vars = {
+    region = "${data.aws_region.current.name}"
+    log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
+    stream_prefix = "awslogs-${var.environment}-alertmanager"
+
+    smtp_username = "${var.smtp_username}"
+    smtp_password = "${var.smtp_password}"
+    smtp_from = "${var.smtp_from}"
+    smtp_server= "${var.smtp_server}"
+  }
+}
+
+resource "aws_ecs_task_definition" "alertmanager-task-definition" {
+  family                = "alertmanager"
+  container_definitions = "${data.template_file.alertmanager-task-definition-template.rendered}"
+}
+
+resource "aws_ecs_service" "alertmanager-ecs-service" {
+  name            = "alertmanager-ecs-service"
+  cluster         = "${module.grafana-ecs-cluster.cluster_id}"
+  task_definition = "${aws_ecs_task_definition.alertmanager-task-definition.arn}"
+  desired_count   = 2
+}
