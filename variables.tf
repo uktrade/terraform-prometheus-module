@@ -140,6 +140,10 @@ variable "autoscaler_exporter_url" {
   type = "string"
 }
 
+variable "eventlogs_exporter_url" {
+  type = "string"
+}
+
 variable "s3_config_bucket" {
   type = "string"
 }

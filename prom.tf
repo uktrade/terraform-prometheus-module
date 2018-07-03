@@ -138,6 +138,7 @@ data "template_file" "prom-task-definition-template" {
     paas_exporter_password = "${var.paas_exporter_password}"
 
     autoscaler_exporter_url = "${var.autoscaler_exporter_url}"
+    eventlogs_exporter_url = "${var.eventlogs_exporter_url}"
 
     region = "${data.aws_region.current.name}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"

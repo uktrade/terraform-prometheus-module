@@ -22,6 +22,10 @@
       {
         "name": "autoscaler_exporter_url",
         "value": "${autoscaler_exporter_url}"
+      },
+      {
+        "name": "eventlogs_exporter_url",
+        "value": "${eventlogs_exporter_url}"
       }
     ],
     "portMappings": [

@@ -1,0 +1,90 @@
+[
+  {
+    "name": "authbroker_proxy",
+    "image": "ukti/authbroker-proxy:latest",
+    "cpu": 200,
+    "memory": 500,
+    "essential": true,
+    "privileged": true,
+    "environment": [
+      {
+        "name": "ABC_REDIRECT_HOST",
+        "value": "${authbroker_proxy_redirect_url}"
+      },
+      {
+        "name": "ABC_BASE_URL",
+        "value": "${authbroker_url}"
+      },
+      {
+        "name": "ABC_CLIENT_ID",
+        "value": "${authbroker_client_id}"
+      },
+      {
+        "name": "ABC_CLIENT_SECRET",
+        "value": "${authbroker_client_secret}"
+      },
+      {
+        "name": "SECRET_KEY",
+        "value": "${authbroker_proxy_redirect_url}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${stream_prefix}"
+      }
+    }
+  },
+  {
+    "name": "authbroker_proxy_nginx",
+    "image": "ukti/authbroker-proxy-nginx:latest",
+    "cpu": 200,
+    "memory": 500,
+    "essential": true,
+    "privileged": true,
+    "links": [
+      "authbroker_proxy"
+    ],
+    "portMappings": [
+      {
+        "containerPort": 443
+      }
+    ],
+    "environment": [
+      {
+        "name": "APP_PROXY_TARGET",
+        "value": "grafana.internal.uktrade.io"
+      },
+      {
+        "name": "APP_PROXY_PORT",
+        "value": "3000"
+      },
+      {
+        "name": "APP_PROXY_PROTOCOL",
+        "value": "http"
+      },
+      {
+        "name": "ABC_PROXY_TARGET",
+        "value": "authbroker_proxy"
+      },
+      {
+        "name": "ABC_PROXY_PORT",
+        "value": "5000"
+      },
+      {
+        "name": "DNS_RESOLVER",
+        "value": "${dns_resolver}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log_group}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${stream_prefix}"
+      }
+    }
+  }
+]
