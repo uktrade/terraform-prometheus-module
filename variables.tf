@@ -148,6 +148,10 @@ variable "s3_config_bucket" {
   type = "string"
 }
 
+variable "activity_stream_exporter_dev_url" {
+  type="string"
+}
+
 # alertmanager config
 variable "smtp_username" {}
 variable "smtp_password" {}
