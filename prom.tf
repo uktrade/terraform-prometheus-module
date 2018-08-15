@@ -139,6 +139,7 @@ data "template_file" "prom-task-definition-template" {
 
     autoscaler_exporter_url = "${var.autoscaler_exporter_url}"
     eventlogs_exporter_url = "${var.eventlogs_exporter_url}"
+    activity_stream_exporter_url = "${var.activity_stream_exporter_url}"
     activity_stream_exporter_dev_url = "${var.activity_stream_exporter_dev_url}"
 
     region = "${data.aws_region.current.name}"
