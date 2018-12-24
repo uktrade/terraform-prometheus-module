@@ -128,6 +128,10 @@ variable "paas_exporter_url" {
   type = "string"
 }
 
+variable "paas_london_exporter_url" {
+  type = "string"
+}
+
 variable "paas_exporter_username" {
   type = "string"
 }
@@ -137,6 +141,10 @@ variable "paas_exporter_password" {
 }
 
 variable "autoscaler_exporter_url" {
+  type = "string"
+}
+
+variable "autoscaler_london_exporter_url" {
   type = "string"
 }
 
@@ -161,3 +169,5 @@ variable "smtp_username" {}
 variable "smtp_password" {}
 variable "smtp_from" {}
 variable "smtp_server" {}
+
+variable "ecs_ami" {}

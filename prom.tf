@@ -121,6 +121,8 @@ module "prom-ecs-cluster" {
   extra_volume_size = "${var.prometheus_volume_size}"
 
   additional_user_data_script = "file(${path.module}/files/prom_volume_setup.sh)"
+
+  ami                 = "${var.ecs_ami}"
 }
 
 // -----
@@ -136,8 +138,10 @@ data "template_file" "prom-task-definition-template" {
     paas_exporter_url = "${var.paas_exporter_url}"
     paas_exporter_username = "${var.paas_exporter_username}"
     paas_exporter_password = "${var.paas_exporter_password}"
+    paas_london_exporter_url = "${var.paas_london_exporter_url}"
 
     autoscaler_exporter_url = "${var.autoscaler_exporter_url}"
+    autoscaler_london_exporter_url = "${var.autoscaler_london_exporter_url}"
     eventlogs_exporter_url = "${var.eventlogs_exporter_url}"
     activity_stream_exporter_url = "${var.activity_stream_exporter_url}"
     activity_stream_exporter_dev_url = "${var.activity_stream_exporter_dev_url}"

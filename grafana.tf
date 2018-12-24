@@ -100,6 +100,7 @@ module "grafana-ecs-cluster" {
   docker_storage_size = 25
   security_group_ids = ["${aws_security_group.grafana-lc-sg.id}"]
   key_name            = "${var.environment}-prom"
+  ami                 = "${var.ecs_ami}"
 }
 
 // -----
