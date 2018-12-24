@@ -12,6 +12,10 @@
         "value": "${paas_exporter_url}"
       },
       {
+        "name": "paas_london_exporter_url",
+        "value": "${paas_london_exporter_url}"
+      },
+      {
         "name": "paas_exporter_username",
         "value": "${paas_exporter_username}"
       },
@@ -24,8 +28,20 @@
         "value": "${autoscaler_exporter_url}"
       },
       {
+        "name": "autoscaler_london_exporter_url",
+        "value": "${autoscaler_london_exporter_url}"
+      },
+      {
         "name": "eventlogs_exporter_url",
         "value": "${eventlogs_exporter_url}"
+      },
+      {
+        "name": "activity_stream_exporter_url",
+        "value": "${activity_stream_exporter_url}"
+      },
+      {
+        "name": "activity_stream_exporter_dev_url",
+        "value": "${activity_stream_exporter_dev_url}"
       }
     ],
     "portMappings": [
