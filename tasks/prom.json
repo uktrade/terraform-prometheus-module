@@ -42,6 +42,13 @@
       {
         "name": "activity_stream_exporter_dev_url",
         "value": "${activity_stream_exporter_dev_url}"
+      },{
+        "name": "activity_stream_exporter_eu_west_2_url",
+        "value": "${activity_stream_exporter_eu_west_2_url}"
+      },
+      {
+        "name": "activity_stream_exporter_eu_west_2_dev_url",
+        "value": "${activity_stream_exporter_eu_west_2_dev_url}"
       }
     ],
     "portMappings": [

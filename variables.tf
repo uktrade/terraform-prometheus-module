@@ -164,6 +164,14 @@ variable "activity_stream_exporter_dev_url" {
   type="string"
 }
 
+variable "activity_stream_exporter_eu_west_2_url" {
+  type="string"
+}
+
+variable "activity_stream_exporter_eu_west_2_dev_url" {
+  type="string"
+}
+
 # alertmanager config
 variable "smtp_username" {}
 variable "smtp_password" {}
