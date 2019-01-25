@@ -195,7 +195,7 @@ module "grafana-alb" {
   alb_security_groups           = ["${aws_security_group.prom-alb-sg.id}"]
   backend_protocol              = "HTTPS"
   backend_port                  = 443
-  certificate_arn               = "arn:aws:acm:eu-west-2:177122686904:certificate/58d0e335-afc1-47e6-a025-3cef69a01a88"
+  certificate_arn               = "${var.public_grafana_certifcate_arn}"
   create_log_bucket             = true
   enable_logging                = true
   deregistration_delay          = 10

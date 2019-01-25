@@ -71,7 +71,7 @@ module "prom-alb" {
   alb_security_groups           = ["${aws_security_group.prom-alb-sg.id}"]
   backend_protocol              = "HTTPS"
   backend_port                  = 443
-  certificate_arn               = "${var.public_alb_certificate_arn}"
+  certificate_arn               = "${var.public_prom_certificate_arn}"
   create_log_bucket             = true
   enable_logging                = true
   deregistration_delay          = 10

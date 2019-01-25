@@ -14,7 +14,11 @@ variable "internal_hosted_zone" {
   default = "internal.uktrade.io"
 }
 
-variable "public_alb_certificate_arn" {
+variable "public_grafana_certifcate_arn" {
+  type = "string"
+}
+
+variable "public_prom_certificate_arn" {
   type = "string"
 }
 
