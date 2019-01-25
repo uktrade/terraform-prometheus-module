@@ -1,7 +1,7 @@
 [
   {
     "name": "prometheus",
-    "image": "ukti/prometheus",
+    "image": "quay.io/uktrade/prometheus",
     "cpu": 800,
     "memory": 4000,
     "essential": true,
@@ -69,9 +69,6 @@
         "containerPath": "/prometheus"
       }
     ],
-    "links": [
-      "es_adaptor"
-    ],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -80,55 +77,5 @@
         "awslogs-stream-prefix": "${stream_prefix}"
       }
     }
-  },
-  {
-    "name": "es_adaptor",
-    "image": "ukti/prometheus-es-adaptor",
-    "cpu": 200,
-    "memory": 750,
-    "essential": true,
-    "privileged": true,
-    "ulimits": [
-      {
-        "name": "nofile",
-        "softLimit": 65536,
-        "hardLimit": 65536
-      },
-      {
-        "name": "memlock",
-        "softLimit": -1,
-        "hardLimit": -1
-      }
-    ],
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-group": "${log_group}",
-        "awslogs-region": "${region}",
-        "awslogs-stream-prefix": "${stream_prefix}"
-      }
-    },
-    "environment": [
-      {
-        "name": "ES_URL",
-        "value": "https://${es_url}"
-      },
-      {
-        "name": "ES_WORKERS",
-        "value": "4"
-      },
-      {
-        "name": "ES_BATCH_COUNT",
-        "value": "-1"
-      },
-      {
-        "name": "ES_BATCH_SIZE",
-        "value": "-1"
-      },
-      {
-        "name": "ES_BATCH_INTERVAL",
-        "value": "30"
-      }
-    ]
   }
 ]
