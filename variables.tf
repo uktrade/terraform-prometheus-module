@@ -160,15 +160,11 @@ variable "s3_config_bucket" {
   type = "string"
 }
 
-variable "activity_stream_exporter_url" {
-  type="string"
-}
-
-variable "activity_stream_exporter_dev_url" {
-  type="string"
-}
-
 variable "activity_stream_exporter_eu_west_2_url" {
+  type="string"
+}
+
+variable "activity_stream_exporter_eu_west_2_staging_url" {
   type="string"
 }
 
