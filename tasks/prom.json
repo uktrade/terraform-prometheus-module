@@ -36,15 +36,12 @@
         "value": "${eventlogs_exporter_url}"
       },
       {
-        "name": "activity_stream_exporter_url",
-        "value": "${activity_stream_exporter_url}"
-      },
-      {
-        "name": "activity_stream_exporter_dev_url",
-        "value": "${activity_stream_exporter_dev_url}"
-      },{
         "name": "activity_stream_exporter_eu_west_2_url",
         "value": "${activity_stream_exporter_eu_west_2_url}"
+      },
+      {
+        "name": "activity_stream_exporter_eu_west_2_staging_url",
+        "value": "${activity_stream_exporter_eu_west_2_staging_url}"
       },
       {
         "name": "activity_stream_exporter_eu_west_2_dev_url",
