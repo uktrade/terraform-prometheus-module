@@ -172,6 +172,10 @@ variable "activity_stream_exporter_eu_west_2_dev_url" {
   type="string"
 }
 
+variable "data_workspace_exporter_url" {
+  type="string"
+}
+
 variable "data_workspace_exporter_dev_url" {
   type="string"
 }
