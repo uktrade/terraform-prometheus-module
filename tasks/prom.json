@@ -46,6 +46,14 @@
       {
         "name": "data_workspace_exporter_dev_url",
         "value": "${data_workspace_exporter_dev_url}"
+      },
+      {
+        "name": "statsd_exporter_staging_url",
+        "value": "${statsd_exporter_staging_url}"
+      },
+      {
+        "name": "statsd_exporter_url",
+        "value": "${statsd_exporter_url}"
       }
     ],
     "portMappings": [
