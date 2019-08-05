@@ -128,10 +128,6 @@ variable "es_volume_size" {
   default = "50"
 }
 
-variable "paas_exporter_url" {
-  type = "string"
-}
-
 variable "paas_london_exporter_url" {
   type = "string"
 }
@@ -141,10 +137,6 @@ variable "paas_exporter_username" {
 }
 
 variable "paas_exporter_password" {
-  type = "string"
-}
-
-variable "autoscaler_exporter_url" {
   type = "string"
 }
 

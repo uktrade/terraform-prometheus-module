@@ -8,10 +8,6 @@
     "privileged": true,
     "environment": [
       {
-        "name": "paas_exporter_url",
-        "value": "${paas_exporter_url}"
-      },
-      {
         "name": "paas_london_exporter_url",
         "value": "${paas_london_exporter_url}"
       },
@@ -22,10 +18,6 @@
       {
         "name": "paas_exporter_password",
         "value": "${paas_exporter_password}"
-      },
-      {
-        "name": "autoscaler_exporter_url",
-        "value": "${autoscaler_exporter_url}"
       },
       {
         "name": "autoscaler_london_exporter_url",
