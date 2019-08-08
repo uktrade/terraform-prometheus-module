@@ -8,10 +8,6 @@
     "privileged": true,
     "environment": [
       {
-        "name": "paas_exporter_url",
-        "value": "${paas_exporter_url}"
-      },
-      {
         "name": "paas_london_exporter_url",
         "value": "${paas_london_exporter_url}"
       },
@@ -22,10 +18,6 @@
       {
         "name": "paas_exporter_password",
         "value": "${paas_exporter_password}"
-      },
-      {
-        "name": "autoscaler_exporter_url",
-        "value": "${autoscaler_exporter_url}"
       },
       {
         "name": "autoscaler_london_exporter_url",
@@ -54,6 +46,14 @@
       {
         "name": "data_workspace_exporter_dev_url",
         "value": "${data_workspace_exporter_dev_url}"
+      },
+      {
+        "name": "statsd_exporter_staging_url",
+        "value": "${statsd_exporter_staging_url}"
+      },
+      {
+        "name": "statsd_exporter_url",
+        "value": "${statsd_exporter_url}"
       }
     ],
     "portMappings": [
