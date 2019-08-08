@@ -135,12 +135,13 @@ data "template_file" "prom-task-definition-template" {
   vars = {
     es_url = "${aws_elasticsearch_domain.es.endpoint}"
 
-    paas_exporter_url = "${var.paas_exporter_url}"
     paas_exporter_username = "${var.paas_exporter_username}"
     paas_exporter_password = "${var.paas_exporter_password}"
     paas_london_exporter_url = "${var.paas_london_exporter_url}"
 
-    autoscaler_exporter_url = "${var.autoscaler_exporter_url}"
+    statsd_exporter_staging_url = "${var.statsd_exporter_staging_url}"
+    statsd_exporter_url = "${var.statsd_exporter_url}"
+
     autoscaler_london_exporter_url = "${var.autoscaler_london_exporter_url}"
     eventlogs_exporter_url = "${var.eventlogs_exporter_url}"
     activity_stream_exporter_eu_west_2_url = "${var.activity_stream_exporter_eu_west_2_url}"
