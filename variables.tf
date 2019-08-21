@@ -168,6 +168,14 @@ variable "data_workspace_exporter_url" {
   type="string"
 }
 
+variable "data_workspace_exporter_demo_url" {
+  type="string"
+}
+
+variable "data_workspace_exporter_staging_url" {
+  type="string"
+}
+
 variable "data_workspace_exporter_dev_url" {
   type="string"
 }
