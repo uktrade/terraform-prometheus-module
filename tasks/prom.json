@@ -44,6 +44,14 @@
         "value": "${data_workspace_exporter_url}"
       },
       {
+        "name": "data_workspace_exporter_demo_url",
+        "value": "${data_workspace_exporter_demo_url}"
+      },
+      {
+        "name": "data_workspace_exporter_staging_url",
+        "value": "${data_workspace_exporter_staging_url}"
+      },
+      {
         "name": "data_workspace_exporter_dev_url",
         "value": "${data_workspace_exporter_dev_url}"
       },
