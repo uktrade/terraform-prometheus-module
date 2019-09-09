@@ -20,6 +20,18 @@
         "value": "${paas_exporter_password}"
       },
       {
+        "name": "paas_exporter_staging_url",
+        "value": "${paas_london_exporter_url}"
+      },
+      {
+        "name": "paas_exporter_staging_username",
+        "value": "${paas_exporter_username}"
+      },
+      {
+        "name": "paas_exporter_staging_password",
+        "value": "${paas_exporter_password}"
+      },
+      {
         "name": "autoscaler_london_exporter_url",
         "value": "${autoscaler_london_exporter_url}"
       },
