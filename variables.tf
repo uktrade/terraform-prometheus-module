@@ -140,6 +140,18 @@ variable "paas_exporter_password" {
   type = "string"
 }
 
+variable "paas_exporter_staging_url" {
+  type = "string"
+}
+
+variable "paas_exporter_staging_username" {
+  type = "string"
+}
+
+variable "paas_exporter_staging_password" {
+  type = "string"
+}
+
 variable "autoscaler_london_exporter_url" {
   type = "string"
 }
