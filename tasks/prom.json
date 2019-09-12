@@ -21,15 +21,15 @@
       },
       {
         "name": "paas_exporter_staging_url",
-        "value": "${paas_london_exporter_url}"
+        "value": "${paas_exporter_staging_url}"
       },
       {
         "name": "paas_exporter_staging_username",
-        "value": "${paas_exporter_username}"
+        "value": "${paas_exporter_staging_username}"
       },
       {
         "name": "paas_exporter_staging_password",
-        "value": "${paas_exporter_password}"
+        "value": "${paas_exporter_staging_password}"
       },
       {
         "name": "autoscaler_london_exporter_url",

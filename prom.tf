@@ -139,9 +139,9 @@ data "template_file" "prom-task-definition-template" {
     paas_exporter_password = "${var.paas_exporter_password}"
     paas_london_exporter_url = "${var.paas_london_exporter_url}"
 
-    paas_exporter_staging_username = "${var.paas_exporter_username}"
-    paas_exporter_staging_password = "${var.paas_exporter_password}"
-    paas_exporter_staging_url = "${var.paas_london_exporter_url}"
+    paas_exporter_staging_username = "${var.paas_exporter_staging_username}"
+    paas_exporter_staging_password = "${var.paas_exporter_staging_password}"
+    paas_exporter_staging_url = "${var.paas_exporter_staging_url}"
 
     statsd_exporter_staging_url = "${var.statsd_exporter_staging_url}"
     statsd_exporter_url = "${var.statsd_exporter_url}"
