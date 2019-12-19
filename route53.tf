@@ -4,7 +4,9 @@
 
 resource "aws_route53_zone" "prom-private-zone" {
   name = "${var.internal_hosted_zone}"
-  vpc_id = "${module.vpc.vpc_id}"
+  vpc {
+    vpc_id = "${module.vpc.vpc_id}"
+  }
 }
 
 resource "aws_route53_record" "prom-internal-alias" {

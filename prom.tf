@@ -157,6 +157,10 @@ data "template_file" "prom-task-definition-template" {
     data_workspace_exporter_staging_url = "${var.data_workspace_exporter_staging_url}"
     data_workspace_exporter_dev_url = "${var.data_workspace_exporter_dev_url}"
 
+    promregator_url = "${var.promregator_url}"
+    promregator_username = "${var.promregator_username}"
+    promregator_password = "${var.promregator_password}"
+
     region = "${data.aws_region.current.name}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
     stream_prefix = "awslogs-${var.environment}-prometheus"

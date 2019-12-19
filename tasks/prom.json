@@ -74,6 +74,18 @@
       {
         "name": "statsd_exporter_url",
         "value": "${statsd_exporter_url}"
+      },
+      {
+        "name": "promregator_url",
+        "value": "${promregator_url}"
+      },
+      {
+        "name": "promregator_username",
+        "value": "${promregator_username}"
+      },
+      {
+        "name": "promregator_password",
+        "value": "${promregator_password}"
       }
     ],
     "portMappings": [

@@ -200,6 +200,18 @@ variable "statsd_exporter_url" {
   type="string"
 }
 
+variable "promregator_url" {
+  type="string"
+}
+
+variable "promregator_username" {
+  type="string"
+}
+
+variable "promregator_password" {
+  type="string"
+}
+
 # alertmanager config
 variable "smtp_username" {}
 variable "smtp_password" {}

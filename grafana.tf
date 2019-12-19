@@ -41,6 +41,7 @@ resource "aws_elb" "grafana-internal-elb" {
 // -----
 module "grafana-db" {
   source = "terraform-aws-modules/rds/aws"
+  version = "1.23.0"
 
   identifier = "${var.environment}-grafana"
 

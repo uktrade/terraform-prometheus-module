@@ -1,6 +1,7 @@
 
 module "vpc" {
-  source = "github.com/terraform-aws-modules/terraform-aws-vpc"
+  source = "github.com/terraform-aws-modules/terraform-aws-vpc?ref=v1.31.0"
+//  version = "1.31.0"
 
   name = "prometheus-${var.environment}-vpc"
 
