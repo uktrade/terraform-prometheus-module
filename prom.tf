@@ -161,6 +161,10 @@ data "template_file" "prom-task-definition-template" {
     promregator_username = "${var.promregator_username}"
     promregator_password = "${var.promregator_password}"
 
+    aiven_exporter_url = "${var.aiven_exporter_url}"
+    aiven_exporter_username = "${var.aiven_exporter_username}"
+    aiven_exporter_password = "${var.aiven_exporter_password}"
+
     region = "${data.aws_region.current.name}"
     log_group = "${aws_cloudwatch_log_group.prometheus-cwl-log-group.name}"
     stream_prefix = "awslogs-${var.environment}-prometheus"

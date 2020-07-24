@@ -212,6 +212,18 @@ variable "promregator_password" {
   type="string"
 }
 
+variable "aiven_exporter_url" {
+  type="string"
+}
+
+variable "aiven_exporter_username" {
+  type="string"
+}
+
+variable "aiven_exporter_password" {
+  type="string"
+}
+
 # alertmanager config
 variable "smtp_username" {}
 variable "smtp_password" {}
