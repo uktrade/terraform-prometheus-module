@@ -168,6 +168,10 @@ variable "activity_stream_exporter_eu_west_2_url" {
   type="string"
 }
 
+variable "activity_stream_2_exporter_eu_west_2_url" {
+  type="string"
+}
+
 variable "activity_stream_exporter_eu_west_2_staging_url" {
   type="string"
 }
