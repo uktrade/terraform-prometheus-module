@@ -143,6 +143,9 @@ data "template_file" "prom-task-definition-template" {
     paas_exporter_staging_password = "${var.paas_exporter_staging_password}"
     paas_exporter_staging_url = "${var.paas_exporter_staging_url}"
 
+    paas_process_exporter_url = "${var.paas_process_exporter_url}"
+    paas_process_exporter_non_prod_url = "${var.paas_process_exporter_non_prod_url}"
+
     statsd_exporter_staging_url = "${var.statsd_exporter_staging_url}"
     statsd_exporter_url = "${var.statsd_exporter_url}"
 

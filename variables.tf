@@ -128,6 +128,14 @@ variable "es_volume_size" {
   default = "50"
 }
 
+variable "paas_process_exporter_url" {
+  type = "string"
+}
+
+variable "paas_process_exporter_non_prod_url" {
+  type = "string"
+}
+
 variable "paas_london_exporter_url" {
   type = "string"
 }
