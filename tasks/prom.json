@@ -8,6 +8,14 @@
     "privileged": true,
     "environment": [
       {
+        "name": "paas_process_exporter_url",
+        "value": "${paas_process_exporter_url}"
+      },
+      {
+        "name": "paas_process_exporter_non_prod_url",
+        "value": "${paas_process_exporter_non_prod_url}"
+      },
+      {
         "name": "paas_london_exporter_url",
         "value": "${paas_london_exporter_url}"
       },
