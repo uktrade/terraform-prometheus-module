@@ -153,7 +153,6 @@ data "template_file" "prom-task-definition-template" {
     eventlogs_exporter_url = "${var.eventlogs_exporter_url}"
     activity_stream_exporter_eu_west_2_url = "${var.activity_stream_exporter_eu_west_2_url}"
     activity_stream_2_exporter_eu_west_2_url = "${var.activity_stream_2_exporter_eu_west_2_url}"
-    activity_stream_3_exporter_eu_west_2_url = "${var.activity_stream_3_exporter_eu_west_2_url}"
     activity_stream_exporter_eu_west_2_staging_url = "${var.activity_stream_exporter_eu_west_2_staging_url}"
     activity_stream_exporter_eu_west_2_dev_url = "${var.activity_stream_exporter_eu_west_2_dev_url}"
 
